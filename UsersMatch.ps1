@@ -57,6 +57,21 @@ function ChooseUsersCsvFile {
 
 function InputFileIsChanged {
     $UsersFileName = $UsersFileTextBox.Text
+
+    # Construct a new empty datatable 
+    #$dt = New-Object DataTable ("Employee");
+    # Define the table columns. For example:
+    #dt.Columns.Add("id", typeof(int));
+    #dt.Columns.Add("name", typeof(string));
+    #dt.Columns.Add("salary", typeof(decimal));
+    #dt.Columns.Add("dateHired", typeof(DateTime));
+
+    # Add rows 
+    #dt.Rows.Add(1, "Tim Smith", 3500.20, new DateTime(2009, 1, 15));
+    #dt.Rows.Add(2, "Ann Jones", 2700, new DateTime(2010,7,28));
+    #dt.Rows.Add(3, "Tom Chong", 2900, DateTime.Now);       
+
+    #$Result.DataSource 
 }
 
 
