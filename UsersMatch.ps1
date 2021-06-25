@@ -58,20 +58,29 @@ function ChooseUsersCsvFile {
 function InputFileIsChanged {
     $UsersFileName = $UsersFileTextBox.Text
 
-    # Construct a new empty datatable 
-    #$dt = New-Object DataTable ("Employee");
-    # Define the table columns. For example:
-    #dt.Columns.Add("id", typeof(int));
-    #dt.Columns.Add("name", typeof(string));
-    #dt.Columns.Add("salary", typeof(decimal));
-    #dt.Columns.Add("dateHired", typeof(DateTime));
+    $Users = Import-Csv -Header UserName -Path $UsersFileName
+    $Groups = Import-Csv -Path .\groups.csv
 
-    # Add rows 
-    #dt.Rows.Add(1, "Tim Smith", 3500.20, new DateTime(2009, 1, 15));
-    #dt.Rows.Add(2, "Ann Jones", 2700, new DateTime(2010,7,28));
-    #dt.Rows.Add(3, "Tom Chong", 2900, DateTime.Now);       
+    $Datatable = New-Object System.Data.DataTable
+    $Datatable.TableName = 'MatchedUsers'
+    $Datatable.Columns.Add('UserName')
 
-    #$Result.DataSource 
+    $Groups | Foreach-Object {
+        foreach ($property in $_.PSObject.Properties)
+        {
+            $Datatable.Columns.Add($property.Value)
+            break
+        } 
+    }
+
+    $Users | Foreach-Object { 
+        foreach ($property in $_.PSObject.Properties)
+        {
+            $Datatable.Rows.Add($property.Value)
+        } 
+    }
+
+    $Result.DataSource = $Datatable
 }
 
 
